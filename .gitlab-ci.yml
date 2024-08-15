@@ -1,7 +1,7 @@
 image: ruby:2.7
 
 before_script:
-    -bundle install
+    - bundle install
 
 pages:
     script:
