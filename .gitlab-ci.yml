@@ -1,3 +1,4 @@
+
 image: ruby:2.7
 
 before_script:
@@ -8,6 +9,6 @@ pages:
     - bundle exec jekyll build -d public
 artifacts:
   paths:
-  - public
+    - public
 only:
   - main
