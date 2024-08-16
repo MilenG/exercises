@@ -1,0 +1,51 @@
+version: 2.1
+
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:2.7 #CircleCI's optimized Ruby image
+    steps:
+      - checkout # check out the source code
+      - run:
+          name: Install Dependencies
+          command: bundle install
+      - run:
+          name: Build Jekyll site
+          command: bundle exec jekyll build -d public
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - public
+deploy:
+  docker:
+    - image: cimg/base:stable
+  steps:
+    - attach_workspace:
+        at: /tmp/workspace
+    - add_ssh_keys:
+        fingerprints:
+          - "your:ssh:fingerprint"
+    - run:
+        name: Push to Gitlab pages
+        command:  |
+          git config --global user.email "m.g.kebede@uva.nl"
+          git config --global user.name "milengk"
+          cd /tmp/workspace/public
+          git init
+          git remote add origin git@gitlab.com:username/repository.git
+          git add .
+          git commit -m "Deploy Jekyll site"
+          git push -f origin master:gh-pages
+workflow:
+  version: 2
+  build_and_deploy:
+    jobs:
+        - build
+        - deploy:
+            requires:
+              - build
+
+
+
+
