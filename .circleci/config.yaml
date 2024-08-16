@@ -33,7 +33,7 @@ deploy:
           git config --global user.name "milengk"
           cd /tmp/workspace/public
           git init
-          git remote add origin git@gitlab.com:username/repository.git
+          git remote add origin git@gitlab.host:milengk/Thesis-Design-Exercises.git
           git add .
           git commit -m "Deploy Jekyll site"
           git push -f origin master:gh-pages
