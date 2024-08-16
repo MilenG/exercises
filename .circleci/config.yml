@@ -8,11 +8,11 @@ jobs:
     steps:
       - checkout # check out the source code
       - run:
-          name: Install Latest Bundler
-          command: gem install bundler 
+          name: Install Bundler 2.5.17
+          command: gem install bundler -v 2.5.17 
       - run:
           name: Install Dependencies
-          command: bundle install
+          command: bundle _2.5.17_ install
       - run:
           name: Build Jekyll site
           command: bundle exec jekyll build -d public
