@@ -89,12 +89,4 @@ what will be done exactly?
     <button type="submit">Submit</button>
 </form>
 
-10. Is the plan realistic? Does it give a clear picture of what will be done when? Is it possible to
-evaluate whether the student is on track?
-<form action="https://formspree.io/f/{your_form_id}" method="POST">
-    <!-- label for="q1">Your Answer:</label><br -->
-    <input type="text" id="q1" name="q1" placeholder="Enter your answer here"><br>
-    <input type="hidden" name="_subject" value="new submission for Exercise 1">
-    <input type="hidden" name="_next" value="/thank-you">
-    <button type="submit">Submit</button>
-</form>
+
