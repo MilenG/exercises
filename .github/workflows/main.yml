@@ -6,23 +6,33 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup Ruby and Build Jekyll 
-      uses: helaili/jekyll-action@2.0.4
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
       with:
-        token: ${{ secrets.JEKYLL_PAT }}
-        target_branch: 'gh-pages'
+        ruby-version:f '3.0' 
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with: 
-        github_token: ${{ secrets.JEKYLL_PAT }}
-        publish_dir: ./_site
-        publish_branch: gh-pages
+    - name: Install Bundler and Dependencies 
+      uses:  |
+        gem install bundler
+        bundle install
+      env:
+        JEKYLL_ENV: production
+
+    - name: Build Jekyll Site
+      run: bundle exec jekyll build -d _site
+    
+    -name: Deploy to GitHub Pages
+     uses: peaceiris/actions-gh-pages@v3
+     with:
+       github_token: ${{ secrets.JEKYLL_PAT }}
+       publish_dir: ./_site
+       publish_branch: gh-pages 
+     
 
   
