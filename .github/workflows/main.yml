@@ -15,13 +15,13 @@ jobs:
     - name: Setup Ruby and Build Jekyll 
       uses: helaili/jekyll-action@2.0.4
       with:
-        token: ${{ secrets.TDE }}
+        token: ${{ secrets.JEKYLL_PAT }}
         target_branch: 'gh-pages'
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with: 
-        github_token: ${{  secrets.TDE  }}
+        github_token: ${{ secrets.JEKYLL_PAT }}
         publish_dir: ./_site
         publish_branch: gh-pages
 
