@@ -18,7 +18,7 @@ jobs:
         ruby-version: '3.0' 
 
     - name: Install Bundler and Dependencies 
-      uses:  |
+      run: |
         gem install bundler
         bundle install
       env:
