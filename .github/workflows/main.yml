@@ -5,30 +5,29 @@ on:
     branches:
       - main
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
-  steps:
-  - uses: actions/checkout@v2
+    steps:
+    - uses: actions/checkout@v2
 
-  - name: Setup Ruby
-    uses: ruby/setup-ruby@v1
-    with:
-      ruby-version: '3.0.0'
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0.0'
 
-  - name: Install Bundler and dependencies 
-    run: |
-      gem install bundler
-      bundle install 
+    - name: Install Bundler and dependencies 
+      run: |
+        gem install bundler
+        bundle install 
 
-  - name: Build Jekyll stie 
-    run: |
-      bundle exec jekyll build -d public 
+    - name: Build Jekyll stie 
+      run: |
+        bundle exec jekyll build -d public 
 
-  - name: Upload Artifacts 
-    uses: actions/upload-artifact@v2
-    with:
-      name: site
-      path: public/
+    - name: Upload Artifacts 
+      uses: actions/upload-artifact@v2
+      with:
+        name: site
+        path: public/
