@@ -12,22 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
+    - name: Setup Ruby and Build Jekyll 
+      uses: helaili/jekyll-action@2.0.4
       with:
-        ruby-version: '3.0.0'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        target_branch: 'gh-pages'
 
-    - name: Install Bundler and dependencies 
-      run: |
-        gem install bundler
-        bundle install 
+    - name: Deploy to GitHub Pages
+      users: peaceiris/actions-gh-pages@v3
+      with: 
+        github_token: ${{  secrets.GITHUB_TOKEN }}
+        publish_dir: ./_site
+        publish_branch: gh-pages
 
-    - name: Build Jekyll stie 
-      run: |
-        bundle exec jekyll build -d public 
-
-    - name: Upload Artifacts 
-      uses: actions/upload-artifact@v2
-      with:
-        name: site
-        path: public/
+  
